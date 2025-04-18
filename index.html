@@ -3,225 +3,115 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>My Quant Projects</title>
-  <!-- Retro pixel font -->
+  <title>Logan Kelsch — Quant & AI Lab</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg: #111;
       --fg: #ccc;
-      --neon-pink: #ff66cc;
-      --neon-cyan: #00eaff;
-      --neon-green: #39ff14;
-      --transition: 0.3s ease-in-out;
+      --accent: #00eaff;
+      --neon: #39ff14;
     }
     * { box-sizing: border-box; margin:0; padding:0; }
-    body {
-      background: var(--bg);
-      color: var(--fg);
-      font-family: 'Press Start 2P', cursive;
-      line-height: 1.4;
-    }
-    header {
-      text-align: center;
-      padding: 2rem;
-      background: #000;
-      text-shadow: 0 0 8px var(--neon-pink), 0 0 16px var(--neon-pink);
-    }
-    header h1 { font-size: 2rem; color: var(--neon-pink); }
-
-    nav {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      padding: 1rem 0;
-    }
-    nav a {
-      color: var(--neon-cyan);
-      text-decoration: none;
-      transition: color var(--transition);
-    }
-    nav a:hover { color: var(--neon-green); }
-
-    main { padding: 2rem; }
-
-    /* Projects grid */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1.5rem;
-    }
-    .project-card {
-      position: relative;
-      overflow: hidden;
-      background: #222;
-      border: 2px solid var(--neon-cyan);
-      border-radius: 8px;
-      cursor: pointer;
-      transition: transform var(--transition), border-color var(--transition);
-    }
-    .project-card img {
-      width: 100%;
-      display: block;
-      transition: opacity var(--transition);
-    }
-    .project-card:hover {
-      transform: scale(1.05);
-      border-color: var(--neon-pink);
-    }
-    .project-card .overlay {
-      position: absolute;
-      bottom: -100%;
-      left: 0;
-      width: 100%;
-      background: rgba(0,0,0,0.85);
-      color: var(--fg);
-      padding: 1rem;
-      text-align: center;
-      transition: bottom var(--transition);
-    }
-    .project-card:hover .overlay {
-      bottom: 0;
-    }
-    .overlay h3 {
-      margin-bottom: 0.5rem;
-      color: var(--neon-green);
-      font-size: 1rem;
-    }
-    .overlay p {
-      font-size: 0.75rem;
-    }
-
-    /* Misc section */
-    .misc-grid {
-      margin-top: 3rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 1rem;
-    }
-    .misc-item {
-      padding: 0.75rem;
-      background: #222;
-      border: 1px solid var(--neon-cyan);
-      border-radius: 6px;
-      text-align: center;
-      transition: background var(--transition);
-    }
-    .misc-item:hover {
-      background: #333;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem 0;
-      color: var(--neon-cyan);
-      font-size: 0.75rem;
-    }
+    body { background: var(--bg); color: var(--fg); font-family: 'Press Start 2P', cursive; }
+    .container { display: flex; height: 100vh; }
+    .left, .right { width: 50%; display: flex; align-items: center; justify-content: center; }
+    .left { flex-direction: column; text-align: left; padding: 2rem; }
+    .left h1 { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
+    .left p { font-size: 0.875rem; max-width: 20rem; line-height: 1.4; }
+    .right { position: relative; }
+    #nn-canvas { width: 100%; height: 100%; }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>LOGAN KELSCH</h1>
-    <p>Your Quant & AI Trading Lab</p>
-  </header>
-
-  <nav>
-    <a href="#projects">Projects</a>
-    <a href="#misc">Misc</a>
-    <a href="#contact">Contact</a>
-  </nav>
-
-  <main>
-    <!-- Projects Section -->
-    <section id="projects">
-      <h2 style="color:var(--neon-pink); text-shadow:0 0 4px var(--neon-pink); margin-bottom:1rem;">
-        Projects
-      </h2>
-      <div class="projects-grid">
-
-        <!-- Example project card -->
-        <div class="project-card" data-static="images/strat1.png" data-gif="gifs/strat1.gif">
-          <img src="images/strat1.png" alt="Strategy 1 screenshot" />
-          <div class="overlay">
-            <h3>Mean Reversion Bot</h3>
-            <p>Automated strategy exploiting mean reversion on ES futures.</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-static="images/strat2.png" data-gif="gifs/strat2.gif">
-          <img src="images/strat2.png" alt="Strategy 2 screenshot" />
-          <div class="overlay">
-            <h3>Momentum Breakout</h3>
-            <p>High-frequency momentum breakout system with dynamic thresholds.</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-static="images/strat3.png" data-gif="gifs/strat3.gif">
-          <img src="images/strat3.png" alt="Strategy 3 screenshot" />
-          <div class="overlay">
-            <h3>Volatility Arbitrage</h3>
-            <p>Pairs trading on volatility skew, hedged across SPX options.</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-static="images/strat4.png" data-gif="gifs/strat4.gif">
-          <img src="images/strat4.png" alt="Strategy 4 screenshot" />
-          <div class="overlay">
-            <h3>Seasonal Patterns</h3>
-            <p>Statistically-driven seasonal strategy on commodities.</p>
-          </div>
-        </div>
-
-        <div class="project-card" data-static="images/strat5.png" data-gif="gifs/strat5.gif">
-          <img src="images/strat5.png" alt="Strategy 5 screenshot" />
-          <div class="overlay">
-            <h3>HMM Regime Model</h3>
-            <p>Hidden Markov Model to switch regime‑adaptive strategies.</p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- Misc Projects Section -->
-    <section id="misc">
-      <h2 style="color:var(--neon-cyan); text-shadow:0 0 4px var(--neon-cyan); margin:2rem 0 1rem;">
-        Miscellaneous
-      </h2>
-      <div class="misc-grid">
-        <div class="misc-item">Data Visualization Dashboard</div>
-        <div class="misc-item">Custom SQL Query Builder</div>
-        <div class="misc-item">Conveyor Belt Object Counter</div>
-        <div class="misc-item">Latex Report Generator</div>
-        <div class="misc-item">CLI Utilities Suite</div>
-        <div class="misc-item">Heatmap Navigator</div>
-        <div class="misc-item">SSH Mount Tool</div>
-        <div class="misc-item">Random Distribution Demo</div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="contact">
-    &copy; 2025 Logan Kelsch — Built with VS Code &amp; Retro Vibes
-  </footer>
+  <div class="container">
+    <div class="left">
+      <h1>Logan Kelsch</h1>
+      <p>Junior CS & Data Science undergrad building AI‑driven trading strategies with machine learning, neural nets, and quant research.</p>
+    </div>
+    <div class="right">
+      <canvas id="nn-canvas"></canvas>
+    </div>
+  </div>
 
   <script>
-    // Swap static image ↔ GIF on hover
-    document.querySelectorAll('.project-card').forEach(card => {
-      const img = card.querySelector('img');
-      const staticSrc = card.dataset.static;
-      const gifSrc    = card.dataset.gif;
+    const canvas = document.getElementById('nn-canvas');
+    const ctx = canvas.getContext('2d');
+    function resize() {
+      canvas.width = canvas.clientWidth;
+      canvas.height = canvas.clientHeight;
+      drawNet();
+    }
+    window.addEventListener('resize', resize);
 
-      card.addEventListener('mouseenter', () => {
-        img.src = gifSrc;
+    // Simple 3-layer network: input(3) -> hidden(5) -> output(2)
+    const layers = [3, 5, 2];
+    let nodes = [];
+    let edges = [];
+
+    function initNet() {
+      nodes = [];
+      edges = [];
+      const marginX = 100;
+      const layerSpacing = (canvas.width - 2 * marginX) / (layers.length - 1);
+      layers.forEach((count, i) => {
+        const x = marginX + i * layerSpacing;
+        const spacingY = canvas.height / (count + 1);
+        for (let j = 0; j < count; j++) {
+          nodes.push({ x, y: spacingY * (j + 1), on: false });
+        }
       });
-      card.addEventListener('mouseleave', () => {
-        img.src = staticSrc;
+      // create edges
+      let offset = 0;
+      for (let i = 0; i < layers.length -1; i++) {
+        const aStart = offset;
+        const aCount = layers[i];
+        const bStart = offset + aCount;
+        const bCount = layers[i+1];
+        for (let a = 0; a < aCount; a++) {
+          for (let b = 0; b < bCount; b++) {
+            edges.push([aStart + a, bStart + b]);
+          }
+        }
+        offset += aCount;
+      }
+    }
+
+    function drawNet() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      // draw edges
+      ctx.strokeStyle = 'rgba(100,100,100,0.5)';
+      edges.forEach(([i,j]) => {
+        const u = nodes[i], v = nodes[j];
+        ctx.beginPath(); ctx.moveTo(u.x, u.y); ctx.lineTo(v.x, v.y); ctx.stroke();
       });
-    });
+      // draw nodes
+      nodes.forEach(n => {
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, 12, 0, Math.PI*2);
+        ctx.fillStyle = n.on ? 'rgba(57,255,20,0.9)' : 'rgba(50,50,50,0.6)';
+        ctx.fill();
+      });
+    }
+
+    function flicker(duration=1000) {
+      const interval = setInterval(() => {
+        // random subset flicker
+        nodes.forEach(n => n.on = Math.random() < 0.2);
+        drawNet();
+      }, 100);
+      setTimeout(() => {
+        clearInterval(interval);
+        nodes.forEach(n => n.on = false);
+        drawNet();
+      }, duration);
+    }
+
+    // init and draw once
+    initNet(); resize();
+
+    // trigger flicker on hover
+    canvas.addEventListener('mouseenter', () => flicker(800));
   </script>
-
 </body>
 </html>
