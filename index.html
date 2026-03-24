@@ -2,116 +2,463 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Logan Kelsch — Quant & AI Lab</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #111;
-      --fg: #ccc;
-      --accent: #00eaff;
-      --neon: #39ff14;
-    }
-    * { box-sizing: border-box; margin:0; padding:0; }
-    body { background: var(--bg); color: var(--fg); font-family: 'Press Start 2P', cursive; }
-    .container { display: flex; height: 100vh; }
-    .left, .right { width: 50%; display: flex; align-items: center; justify-content: center; }
-    .left { flex-direction: column; text-align: left; padding: 2rem; }
-    .left h1 { font-size: 2rem; color: var(--accent); margin-bottom: 1rem; }
-    .left p { font-size: 0.875rem; max-width: 20rem; line-height: 1.4; }
-    .right { position: relative; }
-    #nn-canvas { width: 100%; height: 100%; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Logan Kelsch | Portfolio</title>
+  <meta
+    name="description"
+    content="Portfolio website for Logan Kelsch showcasing machine learning, research, software engineering, and project work."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="container">
-    <div class="left">
-      <h1>Logan Kelsch</h1>
-      <p>Junior CS & Data Science undergrad building AI‑driven trading strategies with machine learning, neural nets, and quant research.</p>
-    </div>
-    <div class="right">
-      <canvas id="nn-canvas"></canvas>
-    </div>
-  </div>
+  <div class="noise"></div>
+  <div class="page-glow page-glow-1"></div>
+  <div class="page-glow page-glow-2"></div>
 
-  <script>
-    const canvas = document.getElementById('nn-canvas');
-    const ctx = canvas.getContext('2d');
-    function resize() {
-      canvas.width = canvas.clientWidth;
-      canvas.height = canvas.clientHeight;
-      drawNet();
-    }
-    window.addEventListener('resize', resize);
+  <header class="site-header">
+    <a class="brand" href="#top">LK</a>
+    <nav class="nav">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#highlights">Highlights</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="#contact">Get In Touch</a>
+  </header>
 
-    // Simple 3-layer network: input(3) -> hidden(5) -> output(2)
-    const layers = [3, 5, 2];
-    let nodes = [];
-    let edges = [];
+  <main id="top">
+    <section class="hero section">
+      <div class="eyebrow reveal">Machine Learning · Research · Software Engineering</div>
 
-    function initNet() {
-      nodes = [];
-      edges = [];
-      const marginX = 100;
-      const layerSpacing = (canvas.width - 2 * marginX) / (layers.length - 1);
-      layers.forEach((count, i) => {
-        const x = marginX + i * layerSpacing;
-        const spacingY = canvas.height / (count + 1);
-        for (let j = 0; j < count; j++) {
-          nodes.push({ x, y: spacingY * (j + 1), on: false });
-        }
-      });
-      // create edges
-      let offset = 0;
-      for (let i = 0; i < layers.length -1; i++) {
-        const aStart = offset;
-        const aCount = layers[i];
-        const bStart = offset + aCount;
-        const bCount = layers[i+1];
-        for (let a = 0; a < aCount; a++) {
-          for (let b = 0; b < bCount; b++) {
-            edges.push([aStart + a, bStart + b]);
-          }
-        }
-        offset += aCount;
-      }
-    }
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="hero-kicker reveal">Logan Kelsch</p>
+          <h1 class="hero-title reveal">
+            I build research-heavy systems, intelligent software,
+            and practical machine learning projects.
+          </h1>
+          <p class="hero-text reveal">
+            I am a Salisbury University senior focused on computational intelligence,
+            software engineering, and applied ML. My work moves across symbolic regression,
+            computer vision, research software, healthcare tooling, and full-stack product builds.
+          </p>
 
-    function drawNet() {
-      ctx.clearRect(0,0,canvas.width,canvas.height);
-      // draw edges
-      ctx.strokeStyle = 'rgba(100,100,100,0.5)';
-      edges.forEach(([i,j]) => {
-        const u = nodes[i], v = nodes[j];
-        ctx.beginPath(); ctx.moveTo(u.x, u.y); ctx.lineTo(v.x, v.y); ctx.stroke();
-      });
-      // draw nodes
-      nodes.forEach(n => {
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, 12, 0, Math.PI*2);
-        ctx.fillStyle = n.on ? 'rgba(57,255,20,0.9)' : 'rgba(50,50,50,0.6)';
-        ctx.fill();
-      });
-    }
+          <div class="hero-actions reveal">
+            <a class="btn btn-solid" href="#work">Explore Projects</a>
+            <a class="btn btn-ghost" href="https://github.com/Logan-Kelsch" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
 
-    function flicker(duration=1000) {
-      const interval = setInterval(() => {
-        // random subset flicker
-        nodes.forEach(n => n.on = Math.random() < 0.2);
-        drawNet();
-      }, 100);
-      setTimeout(() => {
-        clearInterval(interval);
-        nodes.forEach(n => n.on = false);
-        drawNet();
-      }, duration);
-    }
+          <div class="hero-badges reveal">
+            <span>Computational Intelligence</span>
+            <span>Python · C · C++ · Bash</span>
+            <span>Research-minded builder</span>
+          </div>
+        </div>
 
-    // init and draw once
-    initNet(); resize();
+        <div class="hero-media reveal slide-up">
+          <!-- Replace this image at: assets/images/hero/hero-main.jpg -->
+          <img src="assets/images/hero/hero-main.jpg" alt="Hero placeholder image" class="hero-image">
+          <div class="hero-panel">
+            <p class="panel-label">Current direction</p>
+            <h2>Systems that turn messy signals into clear action.</h2>
+            <p>
+              The through-line across my work is taking high-noise environments
+              and building something structured, useful, and explainable out of them.
+            </p>
+          </div>
+        </div>
+      </div>
 
-    // trigger flicker on hover
-    canvas.addEventListener('mouseenter', () => flicker(800));
-  </script>
+      <div class="hero-marquee">
+        <div class="marquee-track">
+          <span>Structural Regression</span>
+          <span>Lunara</span>
+          <span>Chick Counting</span>
+          <span>Oyster Detection</span>
+          <span>KnowYourUni</span>
+          <span>AI Life Hub</span>
+          <span>Structural Regression</span>
+          <span>Lunara</span>
+          <span>Chick Counting</span>
+          <span>Oyster Detection</span>
+          <span>KnowYourUni</span>
+          <span>AI Life Hub</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="section">
+      <div class="section-intro reveal">
+        <p class="eyebrow">Selected Work</p>
+        <h2>Projects across research, product engineering, and intelligent systems.</h2>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card reveal">
+          <div class="project-number">01</div>
+          <h3>Structural Regression</h3>
+          <p>
+            A symbolic-regression and grammar-search direction aimed at modeling complex time-series
+            behavior with hierarchical structure, iterative evaluation, and custom target design.
+          </p>
+          <div class="project-meta">
+            <span>Python</span>
+            <span>Symbolic Regression</span>
+            <span>Time Series</span>
+          </div>
+          <a href="#project-structural-regression" class="text-link">Open project</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-number">02</div>
+          <h3>Lunara</h3>
+          <p>
+            A women's-health-focused assistant concept built around clearer triage,
+            better information flow, and modern frontend/backend architecture.
+          </p>
+          <div class="project-meta">
+            <span>FastAPI</span>
+            <span>React</span>
+            <span>AI</span>
+          </div>
+          <a href="#project-lunara" class="text-link">Open project</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-number">03</div>
+          <h3>Chick Counting</h3>
+          <p>
+            Computer vision work centered on counting chicks from video data and turning raw detections
+            into cleaner, more useful operational signals.
+          </p>
+          <div class="project-meta">
+            <span>YOLO</span>
+            <span>Computer Vision</span>
+            <span>Python</span>
+          </div>
+          <a href="#project-chick-counting" class="text-link">Open project</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-number">04</div>
+          <h3>Oyster Detection</h3>
+          <p>
+            REU-centered model training and deployment work that combines dataset handling,
+            model comparison, exports, and a web-facing delivery layer.
+          </p>
+          <div class="project-meta">
+            <span>Node</span>
+            <span>Model Deployment</span>
+            <span>Research</span>
+          </div>
+          <a href="#project-oyster-detection" class="text-link">Open project</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-number">05</div>
+          <h3>KnowYourUni</h3>
+          <p>
+            A higher-ed analytics concept built around graph thinking, academic data, and clearer
+            insight into university relationships and outcomes.
+          </p>
+          <div class="project-meta">
+            <span>Neo4j</span>
+            <span>Analytics</span>
+            <span>Hackathon</span>
+          </div>
+          <a href="#project-knowyouruni" class="text-link">Open project</a>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-number">06</div>
+          <h3>AI Life Hub / SU AI Club</h3>
+          <p>
+            A React + Vite project with themed categories and configurable UI, reflecting an interest
+            in product flow, interface clarity, and deployable web builds.
+          </p>
+          <div class="project-meta">
+            <span>React</span>
+            <span>Vite</span>
+            <span>UI</span>
+          </div>
+          <a href="#project-ai-life-hub" class="text-link">Open project</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="about-left reveal">
+        <p class="eyebrow">About</p>
+        <h2>
+          I like difficult projects that sit between research,
+          engineering, experimentation, and real-world use.
+        </h2>
+      </div>
+
+      <div class="about-right reveal">
+        <p>
+          My portfolio is intentionally built around work that looks technical because it is.
+          A lot of what I enjoy sits in ambiguous spaces: designing targets, building evaluation logic,
+          stitching software together, testing ideas, and figuring out how to make complex systems behave.
+        </p>
+        <p>
+          Across my recent work, that has meant symbolic regression for market modeling, computer vision
+          pipelines, full-stack health tooling, applied analytics, and software for research-heavy workflows.
+        </p>
+      </div>
+    </section>
+
+    <section class="section profile-band">
+      <div class="profile-grid">
+        <div class="profile-photo reveal">
+          <!-- Replace this image at: assets/images/profile/about.jpg -->
+          <img src="assets/images/profile/about.jpg" alt="Profile placeholder image">
+        </div>
+
+        <div class="profile-copy reveal">
+          <p class="eyebrow">Profile</p>
+          <h2>Focused on ML, systems, and building things that can actually be used.</h2>
+          <div class="bullet-grid">
+            <div class="bullet-item">
+              <span class="bullet-title">Education</span>
+              <p>Salisbury University senior working across computer science, data science, and research-heavy technical projects.</p>
+            </div>
+            <div class="bullet-item">
+              <span class="bullet-title">Core stack</span>
+              <p>Python, C, C++, Bash, React, FastAPI, JavaScript, TypeScript, SQL, ML workflows, and HPC-oriented experimentation.</p>
+            </div>
+            <div class="bullet-item">
+              <span class="bullet-title">Working style</span>
+              <p>I care about strong direction, practical implementation, and making complicated ideas communicable.</p>
+            </div>
+            <div class="bullet-item">
+              <span class="bullet-title">What I am aiming for</span>
+              <p>Research engineering, machine learning engineering, and software roles where depth and initiative matter.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-structural-regression" class="section feature-section">
+      <div class="feature-media reveal">
+        <!-- Replace this image at: assets/images/projects/structural-regression/cover.jpg -->
+        <img src="assets/images/projects/structural-regression/cover.jpg" alt="Structural Regression placeholder image">
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">01 · Structural Regression</p>
+        <h2>Grammar-guided symbolic regression for complex time-series behavior.</h2>
+        <p>
+          This work is centered on building a richer search process for difficult data,
+          especially time-series settings where simple modeling assumptions break quickly.
+          The direction combines multi-expression programming, grammar ideas, custom targets,
+          and repeated out-of-sample thinking.
+        </p>
+        <ul class="feature-list">
+          <li>Feature-space search and representation design</li>
+          <li>Custom target construction for trading and market behavior</li>
+          <li>Research-oriented implementation with iterative structure updates</li>
+        </ul>
+        <div class="feature-actions">
+          <a class="btn btn-solid" href="https://github.com/Logan-Kelsch/Structural_Regression" target="_blank" rel="noreferrer">GitHub repo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-lunara" class="section feature-section reverse">
+      <div class="feature-media reveal">
+        <!-- Replace this image at: assets/images/projects/lunara/cover.jpg -->
+        <img src="assets/images/projects/lunara/cover.jpg" alt="Lunara placeholder image">
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">02 · Lunara</p>
+        <h2>A women’s-health triage concept built for clarity, trust, and modern flow.</h2>
+        <p>
+          Lunara reflects a product-facing side of my work: taking a sensitive, high-stakes space
+          and shaping an experience that feels guided, useful, and technically grounded.
+          The project direction combines conversational interfaces, structured intake,
+          and modern web application architecture.
+        </p>
+        <ul class="feature-list">
+          <li>FastAPI backend and React / Next-style frontend thinking</li>
+          <li>AI-assisted information flow and triage support</li>
+          <li>Designed around clearer user communication in a healthcare context</li>
+        </ul>
+        <div class="feature-actions">
+          <a class="btn btn-ghost" href="#contact">Add public case study later</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-chick-counting" class="section feature-section">
+      <div class="feature-media reveal">
+        <!-- Replace this image at: assets/images/projects/chick-counting/cover.jpg -->
+        <img src="assets/images/projects/chick-counting/cover.jpg" alt="Chick Counting placeholder image">
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">03 · Chick Counting</p>
+        <h2>Computer vision for reliable counting from difficult real-world video.</h2>
+        <p>
+          This project focuses on turning raw video into usable operational information.
+          It sits at the intersection of vision modeling, detection quality, feature extraction,
+          and designing outputs that are useful beyond a demo.
+        </p>
+        <ul class="feature-list">
+          <li>YOLO-based detection pipeline work</li>
+          <li>Counting logic and detection-derived feature use</li>
+          <li>Applied ML in a practical agricultural setting</li>
+        </ul>
+        <div class="feature-actions">
+          <a class="btn btn-ghost" href="#contact">Add private visuals later</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-oyster-detection" class="section feature-section reverse">
+      <div class="feature-media reveal">
+        <!-- Replace this image at: assets/images/projects/oyster-detection/cover.jpg -->
+        <img src="assets/images/projects/oyster-detection/cover.jpg" alt="Oyster Detection placeholder image">
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">04 · Oyster Detection</p>
+        <h2>REU-driven detection, model comparison, and deployment workflow.</h2>
+        <p>
+          Oyster Detection combines model training work with web delivery and deployment concerns.
+          It is a good example of a project that spans research, engineering, and shipping constraints
+          rather than stopping at model training alone.
+        </p>
+        <ul class="feature-list">
+          <li>Training data, exports, and model comparison</li>
+          <li>Node-based web layer for local and hosted use</li>
+          <li>Docker included for cloud-oriented deployment</li>
+        </ul>
+        <div class="feature-actions">
+          <a class="btn btn-solid" href="https://github.com/Logan-Kelsch/Oyster_Detection" target="_blank" rel="noreferrer">GitHub repo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-knowyouruni" class="section feature-section">
+      <div class="feature-media reveal">
+        <!-- Replace this image at: assets/images/projects/knowyouruni/cover.jpg -->
+        <img src="assets/images/projects/knowyouruni/cover.jpg" alt="KnowYourUni placeholder image">
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">05 · KnowYourUni</p>
+        <h2>A graph-driven university analytics concept.</h2>
+        <p>
+          KnowYourUni is aimed at making academic data easier to navigate and more meaningful.
+          The idea leans on knowledge-graph thinking, relationship-aware data modeling,
+          and presenting institutional information in a clearer analytical form.
+        </p>
+        <ul class="feature-list">
+          <li>Knowledge graph mindset with Neo4j-style direction</li>
+          <li>Hackathon-oriented build and rapid prototyping</li>
+          <li>Academic analytics with a product layer on top</li>
+        </ul>
+        <div class="feature-actions">
+          <a class="btn btn-ghost" href="#contact">Add public link later</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="project-ai-life-hub" class="section feature-section reverse">
+      <div class="feature-media reveal">
+        <!-- Replace this image at: assets/images/projects/ai-life-hub/cover.jpg -->
+        <img src="assets/images/projects/ai-life-hub/cover.jpg" alt="AI Life Hub placeholder image">
+      </div>
+      <div class="feature-copy reveal">
+        <p class="eyebrow">06 · AI Life Hub / SU AI Club</p>
+        <h2>Interface-focused React work with themed categories and configurable UI.</h2>
+        <p>
+          This project represents the product and frontend side of my work.
+          It is built as a React + Vite app with category flows, settings controls,
+          and a more polished application feel than a simple static site.
+        </p>
+        <ul class="feature-list">
+          <li>React + Vite web application structure</li>
+          <li>Theme and accent customization</li>
+          <li>Useful reference point for campus-facing software work</li>
+        </ul>
+        <div class="feature-actions">
+          <a class="btn btn-solid" href="https://github.com/Logan-Kelsch/website_SU_AI_Club" target="_blank" rel="noreferrer">GitHub repo</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="highlights" class="section metrics-section">
+      <div class="section-intro reveal">
+        <p class="eyebrow">Highlights</p>
+        <h2>Work, leadership, and context that shape how I build.</h2>
+      </div>
+
+      <div class="metrics-grid"><!-- metric cards injected from content.js -->
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <span class="timeline-year">Academic focus</span>
+          <p>Computational intelligence, AI, machine learning, research methods, software engineering, and systems-minded implementation.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">Research pattern</span>
+          <p>I tend to be most interested in projects where experimentation, software, and domain knowledge all matter at once.</p>
+        </div>
+        <div class="timeline-item">
+          <span class="timeline-year">Build pattern</span>
+          <p>I like going beyond model training into deployment, usability, evaluation, and better interfaces for real people.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section statement-section">
+      <div class="statement-panel reveal">
+        <p class="eyebrow">Approach</p>
+        <h2>
+          Good technical work is not only about making something function.<br>
+          It is also about giving it direction, structure, and clarity.
+        </h2>
+      </div>
+    </section>
+
+    <section id="contact" class="section contact-section">
+      <div class="contact-copy reveal">
+        <p class="eyebrow">Contact</p>
+        <h2>Looking for ML, software, and research-heavy opportunities.</h2>
+        <p>
+          This section is wired so you can keep the current details or quickly swap in
+          your resume link, LinkedIn, and any public case studies once you are ready.
+        </p>
+      </div>
+
+      <div class="contact-panel reveal slide-up">
+        <div class="panel">
+          <p>Email</p>
+          <a href="mailto:lkelsch1@gulls.salisbury.edu">lkelsch1@gulls.salisbury.edu</a>
+
+          <p>GitHub</p>
+          <a href="https://github.com/Logan-Kelsch" target="_blank" rel="noreferrer">github.com/Logan-Kelsch</a>
+
+          <p>LinkedIn</p>
+          <a href="#">Add your LinkedIn URL here</a>
+
+          <p>Resume</p>
+          <a href="#">Add your resume file here</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Fate happens now, you decide.</p>
+    <a href="#top">Back to top</a>
+  </footer>
+
+  <script src="content.js"></script>
+  <script src="populate.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
